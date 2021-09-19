@@ -7,8 +7,18 @@ import java.util.List;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
+/**
+* Finds dictionary words in a test string
+* 
+* @author Agris Klimkans
+* 
+*/
 public class WordsInString
 {
+	/**
+	 * Finds dictionary words in a test string.
+	 * @param args command line arguments
+	 */
 	public static void main(String[] args)
 	{		
 		List<String> commandArgsList = readCommandArgs(args);
@@ -22,7 +32,15 @@ public class WordsInString
 		findWordsInTestString(testString, dictionaryWordsList);	
 	}
 
-	private static void findWordsInTestString(String testString, List<String> dictionaryWordsList) {
+	
+	/**
+	 * 
+	 * Finds dictionary words in string 
+	 * 
+	 * @param testString string to test
+	 * @param dictionaryWordsList list of words from dictionary
+	 */
+	public static void findWordsInTestString(String testString, List<String> dictionaryWordsList) {
 		int wordsFound = 0;
 		List<String> foundWordsList = new ArrayList<>();
 		for(String s : dictionaryWordsList)
@@ -47,7 +65,14 @@ public class WordsInString
 		System.out.println("Words found: " + foundWordsList);
 	}
 
-	private static List<String> readDictionaryFromFile(boolean searchCaseSensitive) {
+	/**
+	 * 
+	 * Reads dictionary from filesystem
+	 * 
+	 * @param searchCaseSensitive, true if search is case sensitive
+	 * @return list of words from dictionary
+	 */
+	public static List<String> readDictionaryFromFile(boolean searchCaseSensitive) {
 		//read dictionary from file
 		
 		String fileName = "input.txt";
@@ -69,7 +94,15 @@ public class WordsInString
 		return dictionaryWordsList;
 	}
 
-	private static String getTestString(List<String> commandArgsList, boolean searchCaseSensitive) {
+	/**
+	 * 
+	 * Reads test string (after the -s command line switch)
+	 * 
+	 * @param commandArgsList list of command line arguments
+	 * @param searchCaseSensitive, true if search is case sensitive
+	 * @return test string
+	 */
+	public static String getTestString(List<String> commandArgsList, boolean searchCaseSensitive) {
 		// read test string after "-s"
 		int indexOfs = commandArgsList.indexOf("-s");
 		String testString = "";
@@ -93,7 +126,14 @@ public class WordsInString
 		return testString;
 	}
 
-	private static boolean isSearchCaseSensitive(List<String> commandArgsList) {
+	/**
+	 * 
+	 * Determines if search is case sensitive
+	 * 
+	 * @param commandArgsList list of command line arguments
+	 * @return true if search is case sensitive
+	 */
+	public static boolean isSearchCaseSensitive(List<String> commandArgsList) {
 		// if "-i" then search case insensitive
 		boolean searchCaseSensitive = (commandArgsList.contains("-i")) ? false : true;
 		if(searchCaseSensitive)
@@ -107,7 +147,14 @@ public class WordsInString
 		return searchCaseSensitive;
 	}
 
-	private static List<String> readCommandArgs(String[] args) {
+	/**
+	 * 
+	 * Reads command line arguments
+	 * 
+	 * @param args cli arguments from the program entry point
+	 * @return cli arguments in a list
+	 */
+	public static List<String> readCommandArgs(String[] args) {
 		Stream<String> commandArgsStream = Arrays.stream(args);
 		List<String> commandArgsList = commandArgsStream.collect(Collectors.toList());
 		return commandArgsList;
